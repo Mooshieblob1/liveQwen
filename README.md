@@ -23,6 +23,23 @@ Microphone → [faster-whisper STT] → Text → [Qwen3-TTS Voice Clone] → Clo
 
 ## Setup
 
+### Automatic (Recommended)
+
+Run the interactive installer — it handles everything:
+
+```bash
+./install.sh
+```
+
+The installer will:
+1. Check for / install **conda** (Miniconda)
+2. Create the `liveqwen` environment with **Python 3.12**
+3. Verify **NVIDIA GPU & CUDA** (offers to install PyTorch with CUDA if needed)
+4. Install **PulseAudio utilities** (`pactl`, `paplay`) for virtual mic support
+5. Install all **Python dependencies** from `requirements.txt`
+6. Verify all imports work (PyTorch, CUDA, faster-whisper, qwen-tts, sounddevice)
+7. Optionally install **Flash Attention 2** (speeds up TTS, requires Ampere+ GPU)
+
 ### 1. Create Environment
 
 ```bash
@@ -234,6 +251,7 @@ In live mode, all utterances from a session are automatically combined into a si
 
 ```
 liveQwen/
+├── install.sh         — Interactive installer (conda, CUDA, PulseAudio, pip)
 ├── launch.sh          — Interactive launcher (activates conda, prompts for options)
 ├── main.py            — Entry point
 ├── config.py          — CLI args and constants
