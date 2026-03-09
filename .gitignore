@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+output/*.wav
+!output/.gitkeep
+voice_samples/*.wav
+!voice_samples/.gitkeep
