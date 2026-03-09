@@ -203,10 +203,15 @@ class PushToTalkDetector:
         self._running = False
 
     def start(self):
-        """Start listening for Enter key presses in a background thread."""
+        """Start listening for Enter key presses in a background thread.
+
+        If stdin is not a TTY (e.g. GUI mode), skips the listener.
+        The trigger can still be set externally via _triggered.set().
+        """
         self._running = True
-        self._listener_thread = threading.Thread(target=self._listen, daemon=True)
-        self._listener_thread.start()
+        if sys.stdin.isatty():
+            self._listener_thread = threading.Thread(target=self._listen, daemon=True)
+            self._listener_thread.start()
 
     def _listen(self):
         """Block on stdin, set trigger on each Enter press.

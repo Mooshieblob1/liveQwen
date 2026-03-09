@@ -59,6 +59,20 @@ ask_yn() {
     [[ "${yn,,}" == "y" ]]
 }
 
+# ── GUI or CLI? ────────────────────────────────────
+echo ""
+echo "Launch mode:"
+echo "  1) GUI (graphical interface)"
+echo "  2) CLI (terminal interactive)"
+read -rp "Choose [1/2] (default: 1): " launch_mode
+launch_mode="${launch_mode:-1}"
+
+if [[ "$launch_mode" == "1" ]]; then
+    echo ""
+    echo "Launching GUI..."
+    exec python gui.py
+fi
+
 # ── Discover reference audio ───────────────────────
 mapfile -t WAVS < <(find voice_samples -maxdepth 1 -name '*.wav' -type f 2>/dev/null | sort)
 
